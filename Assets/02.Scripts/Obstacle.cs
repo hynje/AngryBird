@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Obstacle : MonoBehaviour
 {
@@ -8,7 +10,17 @@ public class Obstacle : MonoBehaviour
     public float health = 100f;
     public float damageMultiplier = 1f;
     public float minimumDamageThreshold = 5f;
+    private AudioSource audioSource;
+    public AudioClip destroySound;
+    public AudioClip[] onCollisionSounds;
     
+    public ParticleSystem destroyEffect;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         float impactForce = collision.relativeVelocity.magnitude;
@@ -21,14 +33,11 @@ public class Obstacle : MonoBehaviour
         TakeDamage(damage);
 
         // 충돌 사운드
-        //PlayHitSound();
+        PlayHitSound();
     }
-    void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
-        Debug.Log(health);
-        // 데미지 시각 효과
-        //StartCoroutine(DamageEffect());
 
         if (health <= 0)
         {
@@ -36,22 +45,24 @@ public class Obstacle : MonoBehaviour
             DestroyObstacle();
         }
     }
+
+    void PlayHitSound()
+    {
+        audioSource.PlayOneShot(onCollisionSounds[Random.Range(0, onCollisionSounds.Length)]);
+    }
     void DestroyObstacle()
     {
         // 파괴 효과 생성
-        // if (destroyEffect != null)
-        // {
-        //     Instantiate(destroyEffect, transform.position, Quaternion.identity);
-        // }
+        if (destroyEffect != null)
+        {
+            Instantiate(destroyEffect, transform.position, Quaternion.identity);
+        }
 
         // 파괴 사운드 재생
-        // if (destroySound != null)
-        // {
-        //     AudioSource.PlayClipAtPoint(destroySound, transform.position);
-        // }
-
-        // 게임 매니저에 알림
-        //GameManager.Instance.OnObstacleDestroyed();
+        if (destroySound != null)
+        {
+            AudioSource.PlayClipAtPoint(destroySound, transform.position);
+        }
 
         gameObject.SetActive(false);
     }

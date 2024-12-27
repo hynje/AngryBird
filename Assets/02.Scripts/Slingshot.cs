@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 public class Slingshot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
@@ -13,6 +14,10 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     public List<Bird> birdsList;
     private Camera mainCamera;
     public GameManager gameManager;
+    private bool isStreching = false;
+    private AudioSource audioSource;
+    public AudioClip strechedSound;
+    public AudioClip[] ShotSound;
     
     private Vector3 startPosition;
     public Vector3 currentPosition;
@@ -42,6 +47,7 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
             var go = gameManager.birds[i].GetComponent<Bird>();
             birdsList.Add(go);
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -61,6 +67,7 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
         if (birdsList.Count > 0)
         {
             birdsList[0].ShootBird(force);
+            audioSource.PlayOneShot(ShotSound[Random.Range(0,ShotSound.Length)]);
             birdsList.RemoveAt(0);
             gameManager.birds.RemoveAt(0);
             gameManager.MoveBird(birdsList.Count);
@@ -81,14 +88,26 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
             currentPosition = ClampBoundary(currentPosition);
             
             SetStrips(currentPosition);
+            if (!isStreching)
+            {
+                PlayStrechedSound();
+                birdsList[0].PlaySelectSound();
+            }
             force = birdsList[0].LaunchBird(currentPosition);
         }
 
+    }
+
+    void PlayStrechedSound()
+    {
+        audioSource.PlayOneShot(strechedSound);
+        isStreching = true;
     }
     void ResetStrips()
     {
         currentPosition = idlePosition.position;
         SetStrips(currentPosition );
+        isStreching = false;
     }
 
     void SetStrips(Vector3 position)

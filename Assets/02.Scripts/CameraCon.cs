@@ -28,7 +28,7 @@ public class CameraCon : MonoBehaviour
 
     void SetTarget()
     {
-        if (birdsList.Count > 0)
+        if (birdsList.Count > 0 && birdsList[0] != null)
         {
             target = birdsList[0].transform;
         }

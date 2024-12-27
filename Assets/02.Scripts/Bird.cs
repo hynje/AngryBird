@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Bird : MonoBehaviour
 {
@@ -10,14 +11,19 @@ public class Bird : MonoBehaviour
     private float launchPower = 16f;
     private float maxLaunchSpeed = 38f;
     public Transform launchPoint;
-
-    public LineRenderer trajectoryRenderer;
+    
+    [Header("Bird AudioClips")]
+    public AudioClip[] onCollisionSounds;
+    public AudioClip selectSound;
+    public AudioClip flySound;
+    public AudioClip destroySound;
 
     [Header("Components")] 
     private Rigidbody2D rb;
     private Animator animator;
-
+    private AudioSource audioSource;
     
+    public LineRenderer trajectoryRenderer;
     public enum States
     {
         Idle,
@@ -37,6 +43,7 @@ public class Bird : MonoBehaviour
     {
         initialPosition = centerPosition.position;
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponentInChildren<Animator>();
         trajectoryRenderer.positionCount = maxStep - 10;
     }
@@ -54,7 +61,7 @@ public class Bird : MonoBehaviour
     
     public Vector3 LaunchBird(Vector3 dragPosition)
     {
-        // 새총 탑승 
+        // 방향 조준
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.freezeRotation = true;
         currentState = States.Launched;
@@ -81,6 +88,7 @@ public class Bird : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.freezeRotation = false;
         rb.AddForce(force, ForceMode2D.Impulse);
+        audioSource.PlayOneShot(flySound);
         ClearTrajectory();
         // Trail 활성화
         //if (tr != null) tr.enabled = true;
@@ -130,6 +138,7 @@ public class Bird : MonoBehaviour
         yield return new WaitForSeconds(5f);
         if (gameObject != null)
         {
+            AudioSource.PlayClipAtPoint(destroySound, transform.position);
             Destroy(gameObject);
         }
     }
@@ -141,7 +150,19 @@ public class Bird : MonoBehaviour
             currentState = States.Crushed;
             animator.SetBool("Hit", true);
         }
-
-        StartCoroutine(DestroyAfterDelay());
+        PlayHitSound();
+        if (currentState == States.Crushed)
+        {
+            StartCoroutine(DestroyAfterDelay());
+        }
+    }
+    
+    public void PlaySelectSound()
+    {
+        audioSource.PlayOneShot(selectSound);
+    }
+    void PlayHitSound()
+    {
+        audioSource.PlayOneShot(onCollisionSounds[Random.Range(0, onCollisionSounds.Length)]);
     }
 }
