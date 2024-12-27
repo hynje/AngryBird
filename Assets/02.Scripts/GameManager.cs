@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Transform launchPosition;
     public Transform[] positions;
     public List<GameObject> birds;
+    private int pigCount = 0;
     public Slingshot slingshot;
     public EventSystem eventSystem;
     
@@ -72,5 +73,14 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         eventSystem.enabled = true;
+    }
+
+    public void CountPig(int x)
+    {
+        pigCount += x;
+        if (pigCount <= 0)
+        {
+            Debug.Log("Game Over");
+        }
     }
 }

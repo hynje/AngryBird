@@ -21,6 +21,11 @@ public class ChickenCon : MonoBehaviour
         {
             Dash();
         }
+
+        if (transform.position.y < -30 && gameObject!=null)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void Dash()

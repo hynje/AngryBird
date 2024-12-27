@@ -13,7 +13,6 @@ public class FatBirdCon : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Debug.Log("git test");
     }
     
     void Update()

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Slingshot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    public LineRenderer [] lineRenderers; 
+    public LineRenderer[] lineRenderers; 
     public Transform[] stripPositions;
     public Transform center;
     public Transform idlePosition;
@@ -39,8 +39,8 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
         int count = gameManager.birds.Count;
         for (var i = 0; i < count; i++)
         {
-            var gm = gameManager.birds[i].GetComponent<Bird>();
-            birdsList.Add(gm);
+            var go = gameManager.birds[i].GetComponent<Bird>();
+            birdsList.Add(go);
         }
     }
 

@@ -29,8 +29,6 @@ public class Bird : MonoBehaviour
     [Header("State")]
     private bool isDragging = false;
     private Vector3 initialPosition;
-    //private bool isShoted = false;
-    //private bool onHit = false;
     public Transform centerPosition;
     private int maxStep = 30;
     private float rotationSpeed = 5f;
