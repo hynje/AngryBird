@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
     private int pigCount = 0;
     public Slingshot slingshot;
     public EventSystem eventSystem;
+    public UIManager uiManager;
+    public AudioClip clearSound;
+    public AudioClip failSound;
+    private bool gameOver = false;
+    public Camera mainCamera;
     
     private Vector3 origin = new Vector3(-6.5f, -4.5f, 0);  // slerp 원점 재설정
     public AnimationCurve curve = AnimationCurve.Linear(0, 0, 1, 1);
@@ -24,12 +29,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        mainCamera = Camera.main;
+        Time.timeScale = 1;
         MoveBird(birds.Count);
     }
     
     void Update()
     {
-        
+        if (birds.Count <= 0 && !gameOver)
+        {
+            StartCoroutine(CheckLeftPig());
+            gameOver = true;
+        }
     }
 
     void SetBird()
@@ -78,9 +89,31 @@ public class GameManager : MonoBehaviour
     public void CountPig(int x)
     {
         pigCount += x;
+        Debug.Log(pigCount);
         if (pigCount <= 0)
         {
-            Debug.Log("Game Over");
+            StageClear();
         }
+    }
+
+    IEnumerator CheckLeftPig()
+    {
+        yield return new WaitForSeconds(6f);
+        if (pigCount >= 1)
+        {
+            StageFailed();
+        }
+    }
+
+    private void StageClear()
+    {
+        uiManager.ActiveClearUI();
+        AudioSource.PlayClipAtPoint(clearSound, mainCamera.transform.position);
+    }
+
+    private void StageFailed()
+    {
+        uiManager.ActiveFailUI();
+        AudioSource.PlayClipAtPoint(failSound, mainCamera.transform.position);
     }
 }

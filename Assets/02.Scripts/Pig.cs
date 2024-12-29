@@ -66,8 +66,7 @@ public class Pig : MonoBehaviour
             AudioSource.PlayClipAtPoint(destroySound, transform.position);
         }
         
-
+        Destroy(gameObject);
         gameManager.CountPig(-1);
-        gameObject.SetActive(false);
     }
 }

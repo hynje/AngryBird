@@ -19,6 +19,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/02.Scripts/Bird.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/02.Scripts/ChickenCon.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/02.Scripts/LoadingSceneCon.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/02.Scripts/Slingshot.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -128,7 +129,8 @@
       <workItem from="1735048734669" duration="187000" />
       <workItem from="1735048929413" duration="1243000" />
       <workItem from="1735058831058" duration="196000" />
-      <workItem from="1735102567038" duration="34146000" />
+      <workItem from="1735102567038" duration="34725000" />
+      <workItem from="1735365634638" duration="12761000" />
     </task>
     <servers />
   </component>
