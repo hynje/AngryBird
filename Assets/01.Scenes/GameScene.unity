@@ -5206,9 +5206,57 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 913969454025227057, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515611766291446263, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515611766291446263, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737673236855982397, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737673236855982397, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 94
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702024202925336681, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702024202925336681, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702024202925336681, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702024202925336681, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702024202925336681, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702024202925336681, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6318159277766079573, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
       propertyPath: m_Name
       value: UICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920979770617543467, guid: 40c33eee81e1c43dca47ccd742ca9906, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
