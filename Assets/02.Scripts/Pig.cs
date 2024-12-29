@@ -57,7 +57,6 @@ public class Pig : MonoBehaviour
         if (destroyEffect != null)
         {
             Instantiate(destroyEffect, transform.position - new Vector3(0,0,1), Quaternion.identity);
-            
         }
 
         //파괴 사운드 재생
